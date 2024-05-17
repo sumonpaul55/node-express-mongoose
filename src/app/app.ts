@@ -6,15 +6,22 @@ app.use(express.text())
 
 // express router
 const userRouter = express.Router();
-app.use("/", userRouter)
+const coureRouter = express.Router()
+
+app.use("/api/v1/course", coureRouter)
+app.use("/api/v1/users", userRouter)
 
 
-userRouter.get("/api/v1/users/create-user", (req:Request, res:Response)=>{
+userRouter.post("/create-user", (req:Request, res:Response)=>{
     const user= req.body;
     console.log(user)
     res.json({success: "user is created", user: user})
 })
 
+coureRouter.post("/create-course", (req:Request, res:Response)=>{
+    console.log("courser", req.body)
+    res.json({message: "success"})
+})
 
 
 

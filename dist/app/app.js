@@ -10,11 +10,17 @@ app.use(express_1.default.json());
 app.use(express_1.default.text());
 // express router
 const userRouter = express_1.default.Router();
-app.use("/", userRouter);
-userRouter.get("/api/v1/users/create-user", (req, res) => {
+const coureRouter = express_1.default.Router();
+app.use("/api/v1/course", coureRouter);
+app.use("/api/v1/users", userRouter);
+userRouter.post("/create-user", (req, res) => {
     const user = req.body;
     console.log(user);
     res.json({ success: "user is created", user: user });
+});
+coureRouter.post("/create-course", (req, res) => {
+    console.log("courser", req.body);
+    res.json({ message: "success" });
 });
 // middleware
 const logger = (req, res, next) => {
