@@ -55,6 +55,13 @@ app.post("/query", logger, (req, res) => {
     console.log(req.query);
     res.json({ message: "Success" });
 });
+// all route erro handler
+app.all("*", (req, res) => {
+    res.status(400).json({
+        success: false,
+        message: "Route is not found"
+    });
+});
 // global error handler
 app.use((error, req, res, next) => {
     console.log(error, req, res, next);

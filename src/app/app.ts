@@ -67,7 +67,13 @@ app.post("/query",logger, (req: Request, res:Response)=>{
 })
 
 
-
+// all route erro handler
+app.all("*", (req:Request, res:Response) =>{
+    res.status(400).json({
+        success: false,
+        message: "Route is not found"
+    })
+})
 
 
 // global error handler
@@ -75,7 +81,6 @@ app.use((error:any, req:Request, res:Response, next:NextFunction)=>{
     console.log(error, req, res, next)
     if(error){
         res.status(400).json({success:false, message:"something error"})
-    }
-   
+    }   
 })
 export default app;
